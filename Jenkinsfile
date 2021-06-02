@@ -1,10 +1,9 @@
 pipeline {
     agent any
 
-    parameters {
-        string (name: 'APP_NAME', defaultValue: 'my_app', description: 'application name')
-        choice (name: 'ENVIRONMENT', choices: ['dev','uat','prod'], description: 'environment')
-        booleanParam (name: 'RUN_TEST', defaultValue: true, description: 'run test cases')
+    environment {
+        MY_VARIABLE = 'value'
+        MY_CREDENTIAL = credentials('credential_id')
     }
 
     stages {
@@ -16,20 +15,16 @@ pipeline {
         }
 
         stage("test") {
-            when {
-                expression {
-                    params.RUN_TEST == true
-                }
-            }
             steps {
                 echo "[=== TEST STEPS ===]"
+                echo "My variable value: ${MY_VARIABLE}"
             }
         }
 
         stage("deploy") {
             steps {
                 echo "[=== DEPLOY STEPS ===]"
-                echo "Deploying applicaiton ${params.APP_NAME} in Environment: ${params.ENVIRONMENT}"
+                echo "Credential to remote login: ${MY_CREDENTIAL}"   // Note: Don't print it in actual pipeline.
             }
         }
 
