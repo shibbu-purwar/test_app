@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         MY_VARIABLE = 'value'
-        MY_CREDENTIAL = credentials('credential_id')
+        MY_CREDENTIAL = credentials('test')
     }
 
     stages {
