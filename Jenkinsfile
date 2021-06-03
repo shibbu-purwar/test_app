@@ -16,7 +16,7 @@ pipeline {
 
         stage("test") {
             steps {
-                echo "[=== TEST STEPS ===]"
+                echo "[=== TEST STEPS 3 ===]"
                 echo "My variable value: ${MY_VARIABLE}"
             }
         }
